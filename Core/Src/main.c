@@ -99,24 +99,32 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART2_UART_Init();
-//  MX_I2C1_Init();
-//  MX_TIM1_Init();
-//  MX_TIM2_Init();
-//  MX_TIM3_Init();
-//  MX_TIM16_Init();
-//  MX_TIM17_Init();
+  MX_I2C1_Init();
+  MX_TIM1_Init();
+  MX_TIM2_Init();
+  MX_TIM3_Init();
+  MX_TIM16_Init();
+  MX_TIM17_Init();
   /* USER CODE BEGIN 2 */
+   uint8_t test = 0x5A;
+   uint8_t result = 0x00;
 
+   if(HAL_I2C_Mem_Write(&hi2c1, 0xA0, 0x10, 1, &test, sizeof(test), 500) != HAL_OK){
+   		printf("Blad zapisu\n\r");
+   }
+   HAL_Delay(50);
+   if (HAL_I2C_Mem_Read(&hi2c1, 0xA0, 0x10, 1, &result, sizeof(result), HAL_MAX_DELAY) != HAL_OK){
+   		  printf("Blad odczytu\n\r");
+   }
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int i = 0;
+
   while (1)
   {
-	  //printf("dummy\n");
-	  printf(" %d \n\r", i++);
-	  HAL_Delay(1000);
+	  printf("%d\n\r", result);
+	  HAL_Delay(100);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

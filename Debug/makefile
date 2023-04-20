@@ -46,8 +46,8 @@ l476_jerry.bin \
 all: l476_jerry.elf secondary-outputs
 
 # Tool invocations
-l476_jerry.elf: $(OBJS) $(USER_OBJS) /home/zuzanna/STM32CubeIDE/workspace_1.4.0/l476_jerry/STM32L476RGTX_FLASH.ld
-	arm-none-eabi-gcc -o "l476_jerry.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/zuzanna/STM32CubeIDE/workspace_1.4.0/l476_jerry/STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="l476_jerry.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+l476_jerry.elf: $(OBJS) $(USER_OBJS) /home/kubus/STM32CubeIDE/workspace_1.4.0/l476_jerry/STM32L476RGTX_FLASH.ld
+	arm-none-eabi-gcc -o "l476_jerry.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/kubus/STM32CubeIDE/workspace_1.4.0/l476_jerry/STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="l476_jerry.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
