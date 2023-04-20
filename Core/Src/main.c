@@ -99,23 +99,28 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART2_UART_Init();
-//  MX_I2C1_Init();
-//  MX_TIM1_Init();
-//  MX_TIM2_Init();
-//  MX_TIM3_Init();
-//  MX_TIM16_Init();
-//  MX_TIM17_Init();
+  MX_I2C1_Init();
+  MX_TIM1_Init();
+  MX_TIM2_Init();
+  MX_TIM3_Init();
+  MX_TIM16_Init();
+  MX_TIM17_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int i = 0;
+  HAL_TIM_IC_Start(&htim1, TIM_CHANNEL_1);
+  HAL_TIM_IC_Start(&htim1, TIM_CHANNEL_2);
+  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
+  HAL_Delay(1000);
   while (1)
   {
-	  //printf("dummy\n");
-	  printf(" %d \n\r", i++);
+	  uint32_t start = HAL_TIM_ReadCapturedValue(&htim1, TIM_CHANNEL_1);
+	  uint32_t stop = HAL_TIM_ReadCapturedValue(&htim1, TIM_CHANNEL_2);
+	  printf("%.1f cm\n", (stop - start) / 58.0f);
+
 	  HAL_Delay(1000);
     /* USER CODE END WHILE */
 
